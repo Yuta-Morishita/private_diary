@@ -152,3 +152,5 @@ LOGIN_REDIRECT_URL = 'diary:list'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
 
 ACCOUNT_LOGOUT_ON_GET = True
+
+MEDIA_URL = '/media/'
