@@ -94,22 +94,22 @@ class TestDiaryDeleteView(LoggedInTestCase):
     """DiaryDeleteView用のテストクラス"""
 
     def test_delete_diary_success(self):
-    """日記削除機能が成功することを検証する"""
+        """日記削除機能が成功することを検証する"""
 
-    # テスト用日記データの作成
-    diary = Diary.objects.create(user=self.test_user, title='タイトル')
+        # テスト用日記データの作成
+        diary = Diary.objects.create(user=self.test_user, title='タイトル')
 
-    # 日記削除処理の(Post)を実行
-    response = self.client.post(reverse_lazy('diary:diary_delete', kwargs={'pk': diary.pk}))
+        # 日記削除処理の(Post)を実行
+        response = self.client.post(reverse_lazy('diary:diary_delete', kwargs={'pk': diary.pk}))
 
-    # 日記リストページへのリダイレクトを検証する
-    self.assertRedirects(response, reverse_lazy('diary:diary_list'))
+        # 日記リストページへのリダイレクトを検証する
+        self.assertRedirects(response, reverse_lazy('diary:diary_list'))
 
-    # 日記が削除されたかを検証
-    self.assertEqual(Diary.objects.filter(pk=diary.pk).count(), 0)
+        # 日記が削除されたかを検証
+        self.assertEqual(Diary.objects.filter(pk=diary.pk).count(), 0)
 
-    def test_delete_diary_failure(self):
-        """日記処理が失敗することを検証"""
+        def test_delete_diary_failure(self):
+            """日記処理が失敗することを検証"""
 
         # 日記削除処理(Post)を実行
         response = self.client.post(reverse_lazy('diary:diary_delete', kwargs={'pk': 999}))
